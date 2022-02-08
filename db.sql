@@ -2,15 +2,16 @@ CREATE DATABASE IF NOT EXISTS ktr-msc-ls1;
 USE ktr-msc-ls1;
 
 CREATE TABLE users(
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(25) NOT NULL,
+    password VARCHAR(255),
     company_name VARCHAR(50),
     email VARCHAR(255),
     phone INT
 );
 
 CREATE TABLE businesses(
-    id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(25),
     company_name VARCHAR(50),
     email VARCHAR(255) NOT NULL,
