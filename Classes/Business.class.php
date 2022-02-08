@@ -1,7 +1,6 @@
 <?php
 
-
-class Businesses extends Dbh
+class Business extends Dbh
 {
   private $connection;
   public $businesses;
@@ -11,7 +10,7 @@ class Businesses extends Dbh
     $this->connection = $this->connect();
   }
 
-  public function fetchBuisnessesByUser($user_id)
+  public function fetchBusinessesByUser($user_id)
   {
     $sql = 'SELECT * FROM businesses
         WHERE id = (SELECT id_business from associate_users_businesses 

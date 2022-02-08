@@ -1,10 +1,9 @@
 <?php
-define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT'] . '/');
 spl_autoload_register('myAutoloader');
 
 function myAutoLoader($className)
 {
-  $path = ROOT_DIR . 'php/Classes/';
+  $path = '../Classes/';
   $extension = ".class.php";
   $fullPath = $path . $className . $extension;
 

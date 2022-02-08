@@ -2,7 +2,7 @@
 session_start();
 require('./classes_autoloader.inc.php');
 $user = new User();
-$user->fetchCurrentUser($_SESSION['email']);
+$user->fetchCurrentUser($_SESSION['name']);
 if (!empty($user)) {
   echo json_encode($user);
 } else {
