@@ -26,7 +26,7 @@ class User extends Dbh
   {
     $this->fetchCurrentUser($name);
     if (password_verify($password, $this->currentUser['password'])) {
-      return ['status' => 'success'];
+      return ['status' => 'success', 'user' => $this->currentUser];
     } else {
       return ['status' => 'error'];
     }
@@ -37,6 +37,9 @@ class User extends Dbh
     $this->fetchCurrentUser($name);
     if (!empty($this->currentUser)) {
       return ['status' => 'error', 'reason' => 'name'];
+    }
+    if (empty($phone)) {
+      $phone = 0;
     }
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $sql = 'INSERT INTO users(name, password, company_name, email, phone) VALUES(:name, :password, :company_name, :email, :phone)';

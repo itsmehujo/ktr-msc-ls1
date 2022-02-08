@@ -1,0 +1,33 @@
+#header {
+  display: flex;
+  justify-content: center;
+  padding: 3vh;
+  background: powderblue;
+}
+
+main {
+  margin: 2vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+
+    > * {
+      width: 30vw;
+    }
+
+    span {
+      font-weight: 700;
+      text-align: center;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

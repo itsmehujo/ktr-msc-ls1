@@ -13,7 +13,7 @@ class Business extends Dbh
   public function fetchBusinessesByUser($user_id)
   {
     $sql = 'SELECT * FROM businesses
-        WHERE id = (SELECT id_business from associate_users_businesses 
+        WHERE id = ANY (SELECT id_business from associate_users_businesses 
             WHERE id_user = :user_id )';
     $stmt = $this->connection->prepare($sql);
     $stmt->bindParam(':user_id', $user_id);
@@ -36,14 +36,21 @@ class Business extends Dbh
     if (!empty($existingBusiness)) {
       $this->assignUserAndBusiness($user_id, $existingBusiness['id']);
     } else {
-      $sql = 'INSERT INTO business(name, company_name, email, phone) VALUES(:name, :company_name, :email, :phone)';
+      if (empty($phone)) {
+        $phone = 0;
+      }
+      $sql = 'INSERT INTO businesses(name, company_name, email, phone) VALUES(:name, :company_name, :email, :phone)';
       $stmt = $this->connection->prepare($sql);
       $stmt->bindParam(':name', $name);
       $stmt->bindParam(':company_name', $company_name);
       $stmt->bindParam(':email', $email);
       $stmt->bindParam(':phone', $phone);
+      try {
+        $stmt->execute();
 
-      $stmt->execute();
+      } catch (PDOException $e) {
+        echo $e;
+      }
       $business_id = $this->connection->lastInsertId();
       $this->assignUserAndBusiness($user_id, $business_id);
     }

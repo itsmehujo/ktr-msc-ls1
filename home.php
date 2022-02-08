@@ -1,5 +1,6 @@
 <?php
-if ($_SESSION['email']) {
+session_start();
+if ($_SESSION['id']) {
   header('Location: ./index.php');
 }
 ?>
@@ -9,9 +10,10 @@ if ($_SESSION['email']) {
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
+  <link rel="stylesheet" href="./styles/login.css">
 </head>
-<body>
-<header>
+<body style="margin: 0; font-family: sans-serif;">
+<header id="header">
   <span>Signup / Login</span>
 </header>
 <main>
